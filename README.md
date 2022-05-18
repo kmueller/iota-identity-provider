@@ -36,7 +36,7 @@ The IOTA Identity Provider is based on the work of [Daniel Mader](https://github
 
 ## Architecture & Diagrams
 
-_--architecture--_
+![Overview Picture](./docs/Overview.png "All Components together")
 
 ### Components
 - Keycloak plugin (plugins are called Service Provider Interfaces "SPI" in Keycloak)
@@ -110,8 +110,7 @@ docker-compose logs -f keycloak
 Now you can reach the Keycloak.X server in your browser: https://localhost:8443, with user=admin and password=admin as credentials.
 There is also loaded the IOTA realm from realm-iota.json automatically at startup.
 
-3. 
-In order to stop the docker containers you have to execute
+3. In order to stop the docker containers you have to execute
 ```
 <CTRL-C>
 ```
