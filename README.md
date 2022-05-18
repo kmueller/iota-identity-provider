@@ -11,6 +11,8 @@ Bridging IOTA's self-sovereign identities to existing "Web 2.0" OAuth solutions.
 
 > NOTE: This plugin has NOT been audited or tested in production environments and should only used in non-critical environments until further notice!
 
+The IOTA Identity Provider is based on the work of [Daniel Mader](https://github.com/daniel-mader). There is also a video (Jan 2022) where he explains the context and the Proof of Concept in detail: [2022-01-31 IOTA Experience Identity Meeting – Login with DID](https://www.youtube.com/watch?v=Vu-LuDZTxhg&t=89s)
+
 ## TL;DR
 * This repo contains a plugin for the battle-tested [Keycloak](https://www.keycloak.org) _Open Source Identity and Access Management_
 * This repo contains an updated version for Keycloak versions 17+ - the so-called Keycloak.X - which is based on Quarkus application platform instead of JBoss Wildfly application server
@@ -91,6 +93,7 @@ chmod 755 server.key.pem
 ```
 
 2. Use docker-compose to build the images and to run the "keycloak" and the "sidecar" containers
+
 a) Build the images (make sure the Docker Daemon is running...!)
 ```
 docker-compose build
@@ -117,7 +120,7 @@ docker-compose down
 ```
 
 4. Last but not least
-a) You need to start the [client app](https://github.com/daniel-mader/vuejs-oauth-demo-client) as well... the Demo-Client can be opened in your browser: http://localhost:4220
+a) You need to start the [client app](https://github.com/daniel-mader/vuejs-oauth-demo-client) as well... the Demo-Client can be opened in your browser: http://localhost:4200
 
 b) You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider...
 
