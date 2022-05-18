@@ -5,7 +5,7 @@
 
 # IOTA Identity Provider
 
-Bridging IOTA's self-sovereign identities to existing "Web 2.0" OAuth solutions.
+Bridging IOTA's self-sovereign identities to existing "Web 2.0" OAuth solutions. This fork supports the Keycloak IAM versions 17+ (Quarkus based).
 
 <img src="docs/login-with-iota-button.png" alt="Login With IOTA" style="height: 64px;"/>
 
@@ -13,6 +13,7 @@ Bridging IOTA's self-sovereign identities to existing "Web 2.0" OAuth solutions.
 
 ## TL;DR
 * This repo contains a plugin for the battle-tested [Keycloak](https://www.keycloak.org) _Open Source Identity and Access Management_
+* This repo contains an updated version for Keycloak versions 17+ - the so-called Keycloak.X - which is based on Quarkus application platform instead of JBoss Wildfly application server
 * It adds a custom endpoint where IOTA Identity credentials (DID) can be posted to
 * The plugin tries to verify your _Verifiable Credential_ with the Tangle and hands over the containing user claims to Keycloak's native user management
 * From that point on, every communication is **standard-compliant OAuth / OpenID Connect**
@@ -39,7 +40,7 @@ _--architecture--_
 - Keycloak plugin (plugins are called Service Provider Interfaces "SPI" in Keycloak)
 - "sidecar": simple Node.js REST wrapper around `identity.rs` (used for DID resolving, connection to Tangle)
   - _Note: can be removed if credential verification can be performed in Java_
-- SSI wallet: [https://github.com/cambriota/identity-cli-wallet]()
+- SSI wallet: not yet published 
 - Demo Client app: <a href="https://auth.cambriota.dev/demo/" target="_blank">https://auth.cambriota.dev/demo/</a>
 
 [Read more about the different components here.](./docs/COMPONENTS.md)
@@ -58,7 +59,7 @@ _(still in development)_.
 You need a DID document published to the Tangle.
 You also need to be able to create and sign Verifiable Credentials and Presentations.
 
-You can use [this CLI wallet](https://github.com/cambriota/identity-cli-wallet) to create your DID and Credentials.
+You can use [CLI wallet (not yet published)](https://github.com/cambriota/identity-cli-wallet) to create your DID and Credentials.
 
 Navigate to <a href="https://auth.cambriota.dev/demo/" target="_blank">https://auth.cambriota.dev/demo/</a> to try it out!
 
@@ -74,11 +75,55 @@ Navigate to <a href="https://auth.cambriota.dev/demo/" target="_blank">https://a
 * Java 11
 * Docker, docker-compose
 
+## Quick Start
+
+0. Generate a self-signed cert/key by your own and copy it to a new folder called ./certs
+```
+openssl req -newkey rsa:2048 -nodes -keyout server.key.pem -x509 -days 3650 -out server.crt.pem
+```
+```
+chmod 755 server.key.pem
+```
+
+1. Use this command to build the extension (iota-identity-provider-${SPI_VERSION}.jar) with Gradle (you don't have to install Gradle - gradlew (Gradle Wrapper) is able to download all necessary tools by itself)
 ```
 ./gradlew jar
 ```
 
-Then copy the jar to `$KEYCLOAK_HOME/standalone/deployments/` and touch a file in the same directory `keycloak-iota-spi-0.1.0.jar.dodeploy`.
+2. Use docker-compose to build the images and to run the "keycloak" and the "sidecar" containers
+a) Build the images (make sure the Docker Daemon is running...!)
+```
+docker-compose build
+```
+b) Start the containers
+```
+docker-compose up -d
+```
+c) Attach to the console for viewing logs
+```
+docker-compose logs -f keycloak
+```
+
+Now you can reach the Keycloak.X server in your browser: https://localhost:8443, with user=admin and password=admin as credentials.
+There is also loaded the IOTA realm from realm-iota.json automatically at startup.
+
+3. 
+In order to stop the docker containers you have to execute
+```
+<CTRL-C>
+```
+```
+docker-compose down
+```
+
+4. Last but not least
+a) You need to start the [client app](https://github.com/daniel-mader/vuejs-oauth-demo-client) as well... the Demo-Client can be opened in your browser: http://localhost:4220
+
+b) You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider...
+
+
+
+
 
 ### Dev notes
 * [Export an existing realm from Keycloak](scripts/export-realm.sh)

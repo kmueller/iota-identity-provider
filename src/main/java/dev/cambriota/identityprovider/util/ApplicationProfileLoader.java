@@ -5,6 +5,8 @@ import org.jboss.logging.Logger;
 import java.io.IOException;
 import java.util.Properties;
 
+import io.quarkus.runtime.configuration.ProfileManager; 
+
 /**
  * Small implementation to load config properties from file (similar to Spring Profiles).
  *
@@ -16,13 +18,17 @@ public class ApplicationProfileLoader {
 
     private static Properties loadProperties(String profile) {
         Properties props = new Properties();
+
+        log.infof("The Quarkus Profile is: %s", ProfileManager.getActiveProfile());
+        log.infof("The Profile used here is: %s", profile);       
         try {
             if (profile == null) {
-                props.load(ApplicationProfileLoader.class.getClassLoader().getResourceAsStream("application.properties"));
+                props.load(ApplicationProfileLoader.class.getClassLoader().getResourceAsStream("iota-identity-provider.properties"));
             } else {
-                props.load(ApplicationProfileLoader.class.getClassLoader().getResourceAsStream("application-" + profile + ".properties"));
+                props.load(ApplicationProfileLoader.class.getClassLoader().getResourceAsStream("iota-identity-provider-" + profile + ".properties"));
             }
             log.infof("Properties loaded [profile=%s].", profile);
+            log.infof("Properties are=%s]", props.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

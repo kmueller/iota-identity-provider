@@ -4,11 +4,17 @@
 
 # Ignore Gradle project-specific cache directory
 .gradle
+.run
 
 # Ignore Gradle build output directory
 build
+bin
 
 .DS_Store
 
 # config file
-src/main/resources/application-prod.properties
+src/main/resources/iota-identity-provider-prod.properties
+
+# Certificate and private key
+certs/server.crt.pem
+certs/server.key.pem
