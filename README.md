@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/cambriota/iota-identity-provider/branch/develop/graph/badge.svg)](https://codecov.io/gh/cambriota/iota-identity-provider)
 [![GitHub license](https://img.shields.io/github/license/cambriota/iota-identity-provider)](https://github.com/cambriota/iota-identity-provider/blob/main/LICENSE)
 
-# IOTA Identity Provider
+# IOTA Identity Provider (Keycloak.X)
 
 Bridging IOTA's self-sovereign identities to existing "Web 2.0" OAuth solutions. This fork supports the Keycloak IAM versions 17+ (Quarkus based).
 
