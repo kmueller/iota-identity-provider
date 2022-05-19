@@ -61,7 +61,7 @@ _(still in development)_.
 You need a DID document published to the Tangle.
 You also need to be able to create and sign Verifiable Credentials and Presentations.
 
-You can use [CLI wallet (not yet published)](https://github.com/cambriota/identity-cli-wallet) to create your DID and Credentials.
+You can use [CLI wallet (currently rebuilt to support )](https://github.com/cambriota/identity-cli-wallet) to create your DID and Credentials.
 
 Navigate to <a href="https://auth.cambriota.dev/demo/" target="_blank">https://auth.cambriota.dev/demo/</a> to try it out!
 
@@ -86,6 +86,7 @@ openssl req -newkey rsa:2048 -nodes -keyout server.key.pem -x509 -days 3650 -out
 ```
 chmod 755 server.key.pem
 ```
+![Certs folder](./docs/certs-folder.png "After creation of certificate and private key")
 
 1. Use this command to build the extension (iota-identity-provider-${SPI_VERSION}.jar) with Gradle (you don't have to install Gradle - gradlew (Gradle Wrapper) is able to download all necessary tools by itself)
 ```
@@ -118,10 +119,18 @@ There is also loaded the IOTA realm from realm-iota.json automatically at startu
 docker-compose down
 ```
 
-4. Last but not least
-a) You need to start the [client app](https://github.com/daniel-mader/vuejs-oauth-demo-client) as well... the Demo-Client can be opened in your browser: http://localhost:4200
+4. Last but not least: Client App and CLI Wallet
 
-b) You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider...
+a) Client App
+You need to start the [client app](https://github.com/cambriota/iota-identity-oauth-demo-client) as well... 
+Download and follow the instructions to set-up the server. The only constant you need to adapt is VUE_APP_CLIENT_BASE_URL. You'll find it in ./env.development respectively in ./env.production.local:
+```
+VUE_APP_CLIENT_BASE_URL=https://localhost:8443/realms/iota
+```
+After start the Demo-Client can be opened in your browser: https://localhost:4200
+
+b) CLI Wallet
+You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider. Currently (19th of May 2022) the Wallet is rebuilt to support @iota/identity-wasm:0.5.1 
 
 
 
