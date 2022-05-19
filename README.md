@@ -121,16 +121,16 @@ docker-compose down
 
 4. Last but not least: Client App and CLI Wallet
 
-a) Client App
+a) Client App:
 You need to start the [client app](https://github.com/cambriota/iota-identity-oauth-demo-client) as well... 
-Download and follow the instructions to set-up the server. The only constant you need to adapt is VUE_APP_CLIENT_BASE_URL. You'll find it in ./env.development respectively in ./env.production.local:
+Download and follow the instructions to set-up the server. Related to Keycloak.X the only constant you need to adapt is VUE_APP_CLIENT_BASE_URL. You'll find it in ./env.development respectively in ./env.production.local:
 ```
 VUE_APP_CLIENT_BASE_URL=https://localhost:8443/realms/iota
 ```
 After start the Demo-Client can be opened in your browser: https://localhost:4200
 
-b) CLI Wallet
-You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider. Currently (19th of May 2022) the Wallet is rebuilt to support @iota/identity-wasm:0.5.1 
+b) CLI Wallet:
+You need to either use a Wallet CLI or a Wallet App to communicate with the Identity Provider. Currently (19th of May 2022) the Wallet is rebuilt to support @iota/identity-wasm:0.5.1, [see here](https://github.com/cambriota/iota-identity-provider/issues/1).
 
 
 
